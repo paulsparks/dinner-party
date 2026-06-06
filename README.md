@@ -4,23 +4,16 @@
 
 ### Prerequisites
 
-One of the following environment configurations is necessary:
+The following environment configuration is necessary:
 
-- Nix-based (Preferred)
+- Nix-based
     - [Nix Package Manager](https://nixos.org/download/)
     - [Devenv](https://devenv.sh/getting-started/)
     - [Direnv](https://direnv.net/docs/installation.html) (Recommended, but not required)
-- Docker-based (Container w/ Nix installed)
-    - Docker ([Linux](https://docs.docker.com/engine/install/), [WSL/Mac](https://docs.rancherdesktop.io/getting-started/installation/))
 
 ### Environment Activation
 
 See [Prerequisites](#prerequisites) for the necessary system dependencies.
-
-If you're using a **docker-based** environment, everything is defined in
-`.devcontainer/devcontainer.json`. Most IDEs support this standard and can
-launch the devcontainer. If your IDE does not support this standard, then
-[Dev Container CLI](https://github.com/devcontainers/cli) can be used. [^1]
 
 Once you are in an environment with Nix and devenv installed, you can run
 `devenv shell` to activate the environment. Direnv will do this automatically
