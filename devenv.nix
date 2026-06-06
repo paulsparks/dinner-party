@@ -1,46 +1,75 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
-  # https://devenv.sh/basics/
-  env.GREET = "devenv";
+  dotenv.disableHint = true;
 
-  # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [
+    pkgs.secretspec
+  ];
 
-  # https://devenv.sh/languages/
-  # languages.rust.enable = true;
+  languages.javascript = {
+    enable = true;
+    pnpm = {
+      enable = true;
+      install.enable = true;
+    };
+  };
 
-  # https://devenv.sh/processes/
-  # processes.dev.exec = "${lib.getExe pkgs.watchexec} -n -- ls -la";
+  languages.typescript = {
+    enable = true;
+    lsp.enable = true;
+  };
 
-  # https://devenv.sh/services/
-  services.postgres.enable = true;
+  services.postgres = {
+    enable = true;
+    initialDatabases = [
+      {
+        name = "dinner-party";
+        user = "dinner-party";
+        pass = "dinner-party";
+      }
+    ];
+    initialScript = ''
+      -- Give dinner-party access to create databases (useful for Prisma Shadow DB stuff)
+      ALTER USER "dinner-party" CREATEDB;
+    '';
+    listen_addresses = "0.0.0.0";
+    port = 5432;
+  };
 
-  # https://devenv.sh/scripts/
-  scripts.hello.exec = ''
-    echo hello from $GREET
-  '';
+  scripts.motd = {
+    exec = ''
+      echo "----------------------------------------"
+      echo "              DINNER PARTY              "
+      echo "                                        "
+      echo "Provided Services:                      "
+      echo " - Postgres (localhost:5432)            "
+      echo "                                        "
+      echo "Helper Scripts:                         "
+      ${pkgs.gnused}/bin/sed -e 's| |••|g' -e 's|=| |' <<EOF | ${pkgs.util-linuxMinimal}/bin/column -t | ${pkgs.gnused}/bin/sed -e 's|^| - |' -e 's|••| |g'
+      ${lib.generators.toKeyValue { } (lib.mapAttrs (name: value: value.description) config.scripts)}
+      EOF
+      echo "                                        "
+      echo "To get started, run 'devenv up -d' to   "
+      echo "start the provided services. Then, run  "
+      echo "'pnpm-s run dev' to start the server.   "
+      echo "----------------------------------------"
+    '';
+    description = "Writes the start message with useful instructions";
+  };
 
-  # https://devenv.sh/basics/
+  scripts.pnpm-s = {
+    exec = "secretspec run -- pnpm $@";
+    description = "Runs pnpm with secrets injected (via secretspec)";
+  };
+
   enterShell = ''
-    hello         # Run scripts directly
-    git --version # Use packages
+    motd
   '';
-
-  # https://devenv.sh/tasks/
-  # tasks = {
-  #   "myproj:setup".exec = "mytool build";
-  #   "devenv:enterShell".after = [ "myproj:setup" ];
-  # };
-
-  # https://devenv.sh/tests/
-  enterTest = ''
-    echo "Running tests"
-    git --version | grep --color=auto "${pkgs.git.version}"
-  '';
-
-  # https://devenv.sh/git-hooks/
-  # git-hooks.hooks.shellcheck.enable = true;
-
-  # See full reference at https://devenv.sh/reference/options/
 }
