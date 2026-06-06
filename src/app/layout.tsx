@@ -1,15 +1,10 @@
-import {
-    ColorSchemeScript,
-    MantineProvider,
-    type MantineProviderProps,
-    mantineHtmlProps,
-} from "@mantine/core";
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import type { Metadata } from "next";
 import { Jacquard_24 } from "next/font/google";
-import { theme } from "./theme";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
+import { Providers } from "@/components/Providers";
 
 const font = Jacquard_24({
     weight: "400",
@@ -17,15 +12,6 @@ const font = Jacquard_24({
 
 export const metadata: Metadata = {
     title: "DINNER PARTY!!!",
-};
-
-const mantineTheme: MantineProviderProps["theme"] = {
-    ...theme,
-    fontFamily: font.style.fontFamily,
-    fontSizes: {
-        sm: "12pt",
-        md: "14pt",
-    },
 };
 
 export default function RootLayout({
@@ -43,9 +29,9 @@ export default function RootLayout({
                 <ColorSchemeScript defaultColorScheme="dark" />
             </head>
             <body className={`h-full ${font.className} bg-background!`}>
-                <MantineProvider theme={mantineTheme} defaultColorScheme="dark">
+                <Providers>
                     <div className="h-full p-10">{children}</div>
-                </MantineProvider>
+                </Providers>
             </body>
         </html>
     );

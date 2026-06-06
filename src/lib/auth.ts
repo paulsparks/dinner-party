@@ -1,10 +1,12 @@
+import { zenstackAdapter } from "@zenstackhq/better-auth";
 import { betterAuth } from "better-auth";
-import { additionalTables } from "./additionalTables";
-import { pgPool } from "./db";
+import { db } from "./db";
 
 export const auth = betterAuth({
     baseURL: process.env.BETTER_AUTH_URL,
-    database: pgPool,
+    database: zenstackAdapter(db, {
+        provider: "postgresql",
+    }),
     emailAndPassword: {
         enabled: true,
     },
@@ -14,5 +16,4 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
     },
-    plugins: [additionalTables()],
 });
