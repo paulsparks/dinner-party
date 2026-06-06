@@ -8,14 +8,12 @@
         "start": "next start",
         "lint": "biome check",
         "format": "biome format --write",
-        "migrate": "pnpm dlx auth@latest migrate",
-        "codegen": "kysely-codegen"
+        "migrate": "pnpm dlx auth migrate"
     },
     "dependencies": {
         "@mantine/core": "^9.3.0",
         "@mantine/hooks": "^9.3.0",
         "better-auth": "^1.6.14",
-        "kysely": "^0.29.2",
         "next": "16.2.7",
         "pg": "^8.21.0",
         "postcss": "^8.5.15",
@@ -33,7 +31,6 @@
         "@types/pg": "^8.20.0",
         "@types/react": "^19",
         "@types/react-dom": "^19",
-        "kysely-codegen": "^0.20.0",
         "tailwindcss": "^4",
         "typescript": "^5"
     }

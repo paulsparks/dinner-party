@@ -3,3 +3,5 @@ allowBuilds:
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+overrides:
+  kysely: "^0.28.17"

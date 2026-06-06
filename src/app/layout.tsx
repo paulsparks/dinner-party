@@ -32,11 +32,9 @@ export default function RootLayout({
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
             </head>
-            <body
-                className={`min-h-full flex flex-col ${font.className} bg-background!`}
-            >
+            <body className={`h-full ${font.className} bg-background!`}>
                 <MantineProvider theme={theme} defaultColorScheme="dark">
-                    <div className="p-10">{children}</div>
+                    <div className="h-full p-10">{children}</div>
                 </MantineProvider>
             </body>
         </html>
