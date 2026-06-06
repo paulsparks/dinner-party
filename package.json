@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@mantine/core": "^9.3.0",
+        "@mantine/form": "^9.3.0",
         "@mantine/hooks": "^9.3.0",
         "better-auth": "^1.6.14",
         "next": "16.2.7",

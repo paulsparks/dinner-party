@@ -14,7 +14,7 @@ export default function AuthLayout({ children }: Readonly<PropsWithChildren>) {
 
     useEffect(() => {
         if (!isPending && !session) {
-            router.push(`/login?redirect=${pathname}`);
+            router.push(`/sign-in?redirect=${pathname}`);
         }
     }, [isPending, pathname, router, session]);
 

@@ -1,6 +1,7 @@
 import {
     ColorSchemeScript,
     MantineProvider,
+    type MantineProviderProps,
     mantineHtmlProps,
 } from "@mantine/core";
 import type { Metadata } from "next";
@@ -18,6 +19,15 @@ export const metadata: Metadata = {
     title: "DINNER PARTY!!!",
 };
 
+const mantineTheme: MantineProviderProps["theme"] = {
+    ...theme,
+    fontFamily: font.style.fontFamily,
+    fontSizes: {
+        sm: "12pt",
+        md: "14pt",
+    },
+};
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -33,7 +43,7 @@ export default function RootLayout({
                 <ColorSchemeScript defaultColorScheme="dark" />
             </head>
             <body className={`h-full ${font.className} bg-background!`}>
-                <MantineProvider theme={theme} defaultColorScheme="dark">
+                <MantineProvider theme={mantineTheme} defaultColorScheme="dark">
                     <div className="h-full p-10">{children}</div>
                 </MantineProvider>
             </body>

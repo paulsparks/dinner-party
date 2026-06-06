@@ -13,7 +13,7 @@ export const theme = createTheme({
             "#d45e1e",
             "#b04415",
             "#8c300d",
-            "#6b1f07",
+            "#b04415",
         ],
     },
 });
