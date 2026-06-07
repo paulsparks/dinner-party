@@ -11,6 +11,88 @@ export class SchemaType implements SchemaDef {
         type: "postgresql"
     } as const;
     models = {
+        DinnerParty: {
+            name: "DinnerParty",
+            fields: {
+                id: {
+                    name: "id",
+                    type: "Int",
+                    id: true,
+                    attributes: [{ name: "@id" }, { name: "@default", args: [{ name: "value", value: ExpressionUtils.call("autoincrement") }] }] as readonly AttributeApplication[],
+                    default: ExpressionUtils.call("autoincrement") as FieldDefault
+                },
+                maxGuests: {
+                    name: "maxGuests",
+                    type: "Int"
+                },
+                dateTime: {
+                    name: "dateTime",
+                    type: "DateTime"
+                },
+                description: {
+                    name: "description",
+                    type: "String",
+                    optional: true
+                },
+                guests: {
+                    name: "guests",
+                    type: "DinnerPartyGuest",
+                    array: true,
+                    relation: { opposite: "party" }
+                }
+            },
+            attributes: [
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.literal(true) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("all") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.call("auth"), ["role"]), "==", ExpressionUtils.literal("Admin")) }] }
+            ] as readonly AttributeApplication[],
+            idFields: ["id"],
+            uniqueFields: {
+                id: { type: "Int" }
+            }
+        },
+        DinnerPartyGuest: {
+            name: "DinnerPartyGuest",
+            fields: {
+                party: {
+                    name: "party",
+                    type: "DinnerParty",
+                    attributes: [{ name: "@relation", args: [{ name: "fields", value: ExpressionUtils.array("Int", [ExpressionUtils.field("partyId")]) }, { name: "references", value: ExpressionUtils.array("Int", [ExpressionUtils.field("id")]) }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "guests", fields: ["partyId"], references: ["id"] }
+                },
+                partyId: {
+                    name: "partyId",
+                    type: "Int",
+                    id: true,
+                    foreignKeyFor: [
+                        "party"
+                    ] as readonly string[]
+                },
+                user: {
+                    name: "user",
+                    type: "User",
+                    attributes: [{ name: "@relation", args: [{ name: "fields", value: ExpressionUtils.array("String", [ExpressionUtils.field("userId")]) }, { name: "references", value: ExpressionUtils.array("String", [ExpressionUtils.field("id")]) }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "guestEntries", fields: ["userId"], references: ["id"] }
+                },
+                userId: {
+                    name: "userId",
+                    type: "String",
+                    id: true,
+                    foreignKeyFor: [
+                        "user"
+                    ] as readonly string[]
+                }
+            },
+            attributes: [
+                { name: "@@id", args: [{ name: "fields", value: ExpressionUtils.array("Int", [ExpressionUtils.field("partyId"), ExpressionUtils.field("userId")]) }] },
+                { name: "@@unique", args: [{ name: "fields", value: ExpressionUtils.array("Int", [ExpressionUtils.field("partyId"), ExpressionUtils.field("userId")]) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("userId"), "==", ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"])) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("delete") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("userId"), "==", ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"])) }] }
+            ] as readonly AttributeApplication[],
+            idFields: ["partyId", "userId"],
+            uniqueFields: {
+                partyId_userId: { partyId: { type: "Int" }, userId: { type: "String" } }
+            }
+        },
         User: {
             name: "User",
             fields: {
@@ -55,6 +137,12 @@ export class SchemaType implements SchemaDef {
                     attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }, { name: "@updatedAt" }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
+                role: {
+                    name: "role",
+                    type: "Role",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.literal("User") }] }] as readonly AttributeApplication[],
+                    default: "User" as FieldDefault
+                },
                 sessions: {
                     name: "sessions",
                     type: "Session",
@@ -64,6 +152,12 @@ export class SchemaType implements SchemaDef {
                 accounts: {
                     name: "accounts",
                     type: "Account",
+                    array: true,
+                    relation: { opposite: "user" }
+                },
+                guestEntries: {
+                    name: "guestEntries",
+                    type: "DinnerPartyGuest",
                     array: true,
                     relation: { opposite: "user" }
                 }
@@ -273,7 +367,24 @@ export class SchemaType implements SchemaDef {
             }
         }
     } as const;
+    enums = {
+        Role: {
+            name: "Role",
+            values: {
+                User: "User",
+                Admin: "Admin"
+            }
+        }
+    } as const;
     authType = "User" as const;
+    procedures = {
+        reserveSeat: {
+            params: {
+                partyId: { name: "partyId", type: "Int" }
+            },
+            returnType: "DinnerPartyGuest"
+        }
+    } as const;
     plugins = {};
 }
 export const schema = new SchemaType();

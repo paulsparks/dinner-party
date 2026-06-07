@@ -5,9 +5,13 @@
 
 /* eslint-disable */
 
-import { type SchemaType as $Schema } from "./schema";
+import { schema as $schema, type SchemaType as $Schema } from "./schema";
 import type { ModelResult as $ModelResult } from "@zenstackhq/orm";
+export type DinnerParty = $ModelResult<$Schema, "DinnerParty">;
+export type DinnerPartyGuest = $ModelResult<$Schema, "DinnerPartyGuest">;
 export type User = $ModelResult<$Schema, "User">;
 export type Session = $ModelResult<$Schema, "Session">;
 export type Account = $ModelResult<$Schema, "Account">;
 export type Verification = $ModelResult<$Schema, "Verification">;
+export const Role = $schema.enums.Role.values;
+export type Role = (typeof Role)[keyof typeof Role];
