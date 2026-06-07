@@ -6,11 +6,11 @@ import { QuerySettingsProvider } from "@zenstackhq/tanstack-query/react";
 import { Jacquard_24 } from "next/font/google";
 import { theme } from "@/app/theme";
 
-const font = Jacquard_24({ weight: "400" });
+const evilFont = Jacquard_24({ weight: "400" });
 
 const mantineTheme: MantineProviderProps["theme"] = {
     ...theme,
-    fontFamily: font.style.fontFamily,
+    fontFamily: evilFont.style.fontFamily,
     fontSizes: {
         sm: "12pt",
         md: "14pt",

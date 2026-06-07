@@ -10,3 +10,7 @@
 body {
     --mantine-color-text: #ffe8db;
 }
+
+.mantine-TimePicker-field {
+  font-family: sans-serif !important;
+}

@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { FullscreenLoader } from "@/components/FullscreenLoader";
+import { Navbar } from "@/components/Navbar";
 import { AuthenticatedContext } from "@/contexts/AuthenticatedContext";
 import { useSession } from "@/lib/auth-client";
 
@@ -23,6 +24,11 @@ export default function AuthLayout({ children }: Readonly<PropsWithChildren>) {
     }
 
     return (
-        <AuthenticatedContext value={session}>{children}</AuthenticatedContext>
+        <AuthenticatedContext value={session}>
+            <div className="flex flex-col h-full">
+                <Navbar />
+                <div className="grow p-6">{children}</div>
+            </div>
+        </AuthenticatedContext>
     );
 }

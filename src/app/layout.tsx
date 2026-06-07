@@ -20,18 +20,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html
-            lang="en"
-            className={`${font.className} h-full`}
-            {...mantineHtmlProps}
-        >
+        <html lang="en" className="h-full" {...mantineHtmlProps}>
             <head>
                 <ColorSchemeScript defaultColorScheme="dark" />
             </head>
             <body className={`h-full ${font.className} bg-background!`}>
-                <Providers>
-                    <div className="h-full p-10">{children}</div>
-                </Providers>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );
