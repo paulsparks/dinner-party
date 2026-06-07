@@ -1,5 +1,42 @@
 "use client";
 
+import { Button, Card } from "@mantine/core";
+import { useClientQueries } from "@zenstackhq/tanstack-query/react";
+import { schema } from "~/zenstack/schema";
+
 export default function Home() {
-    return <div className="flex flex-col items-center"></div>;
+    const client = useClientQueries(schema);
+
+    const { data: dinnerParties } = client.dinnerParty.useFindMany();
+
+    return (
+        <div className="flex flex-col items-center px-144 gap-4">
+            {dinnerParties?.map((dinnerParty) => (
+                <Card
+                    className="w-full p-4! shadow-sm!"
+                    withBorder
+                    key={dinnerParty.id}
+                >
+                    <p className="mb-2 text-3xl">
+                        {dinnerParty.dateTime.toLocaleDateString()}{" "}
+                        {dinnerParty.dateTime
+                            .toLocaleTimeString()
+                            .replace("AM", "am")
+                            .replace("PM", "pm")}
+                    </p>
+
+                    <p className="wrap-break-word">{dinnerParty.description}</p>
+
+                    <Button
+                        className="text-3xl!"
+                        variant="outline"
+                        fullWidth
+                        mt="md"
+                    >
+                        Rsvp
+                    </Button>
+                </Card>
+            ))}
+        </div>
+    );
 }

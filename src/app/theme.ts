@@ -15,5 +15,17 @@ export const theme = createTheme({
             "#8c300d",
             "#b04415",
         ],
+        dark: [
+            "#fff",
+            "#fff",
+            "#fff",
+            "#705c56",
+            "#36180e",
+            "#fff",
+            "#140a07",
+            "#fff",
+            "#fff",
+            "#fff",
+        ],
     },
 });
