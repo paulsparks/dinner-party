@@ -3,7 +3,7 @@ import { RPCApiHandler } from "@zenstackhq/server/api";
 import { NextRequestHandler } from "@zenstackhq/server/next";
 import type { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
+import { dbWithAuth } from "@/lib/db";
 import { type SchemaType, schema } from "~/zenstack/schema";
 
 const handler = NextRequestHandler({
@@ -17,9 +17,9 @@ const handler = NextRequestHandler({
                 sessions: [session.session],
             };
 
-            return db.$setAuth(userContext);
+            return dbWithAuth.$setAuth(userContext);
         } else {
-            return db;
+            return dbWithAuth;
         }
     },
     useAppDir: true,

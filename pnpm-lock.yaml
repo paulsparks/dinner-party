@@ -29,6 +29,9 @@ importers:
       '@zenstackhq/orm':
         specifier: ^3.7.2
         version: 3.7.2(better-sqlite3@12.10.0)(pg@8.21.0)(zod@4.4.3)
+      '@zenstackhq/plugin-policy':
+        specifier: ^3.7.2
+        version: 3.7.2(better-sqlite3@12.10.0)(kysely@0.28.17)(pg@8.21.0)(zod@4.4.3)
       '@zenstackhq/schema':
         specifier: ^3.7.2
         version: 3.7.2
@@ -743,6 +746,11 @@ packages:
         optional: true
       sql.js:
         optional: true
+
+  '@zenstackhq/plugin-policy@3.7.2':
+    resolution: {integrity: sha512-BnQLmKfPWoWcdaHcDc5zDVIN4Dc6titWQeHSPjTNNRQHhrv3wzKHL0rkJ79fsVx65hM+rZuaNHUb6jyxwQkwvQ==}
+    peerDependencies:
+      kysely: ^0.28.17
 
   '@zenstackhq/schema@3.7.2':
     resolution: {integrity: sha512-KGOahq6MmA+GlAvvPSmnwh6tjAtBuSwnwr4/HxXueaF2SJifDCkvR5ju6Ajr0T0cAdi/LztzQ0gM+qROVmc0jg==}
@@ -2699,6 +2707,19 @@ snapshots:
     optionalDependencies:
       better-sqlite3: 12.10.0
       pg: 8.21.0
+
+  '@zenstackhq/plugin-policy@3.7.2(better-sqlite3@12.10.0)(kysely@0.28.17)(pg@8.21.0)(zod@4.4.3)':
+    dependencies:
+      '@zenstackhq/common-helpers': 3.7.2
+      '@zenstackhq/orm': 3.7.2(better-sqlite3@12.10.0)(pg@8.21.0)(zod@4.4.3)
+      kysely: 0.28.17
+      ts-pattern: 5.9.0
+    transitivePeerDependencies:
+      - better-sqlite3
+      - mysql2
+      - pg
+      - sql.js
+      - zod
 
   '@zenstackhq/schema@3.7.2':
     dependencies:
