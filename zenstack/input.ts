@@ -5,19 +5,52 @@
 
 /* eslint-disable */
 
-import { type SchemaType as $Schema } from "./schema";
-import type { FindManyArgs as $FindManyArgs, FindUniqueArgs as $FindUniqueArgs, FindFirstArgs as $FindFirstArgs, ExistsArgs as $ExistsArgs, CreateArgs as $CreateArgs, CreateManyArgs as $CreateManyArgs, CreateManyAndReturnArgs as $CreateManyAndReturnArgs, UpdateArgs as $UpdateArgs, UpdateManyArgs as $UpdateManyArgs, UpdateManyAndReturnArgs as $UpdateManyAndReturnArgs, UpsertArgs as $UpsertArgs, DeleteArgs as $DeleteArgs, DeleteManyArgs as $DeleteManyArgs, CountArgs as $CountArgs, AggregateArgs as $AggregateArgs, GroupByArgs as $GroupByArgs, WhereInput as $WhereInput, SelectInput as $SelectInput, IncludeInput as $IncludeInput, OmitInput as $OmitInput, UncheckedCreateInput as $UncheckedCreateInput, CheckedCreateInput as $CheckedCreateInput, UncheckedUpdateInput as $UncheckedUpdateInput, CheckedUpdateInput as $CheckedUpdateInput, QueryOptions as $QueryOptions } from "@zenstackhq/orm";
-import type { SimplifiedPlainResult as $Result, SelectIncludeOmit as $SelectIncludeOmit } from "@zenstackhq/orm";
+import type {
+    AggregateArgs as $AggregateArgs,
+    CheckedCreateInput as $CheckedCreateInput,
+    CheckedUpdateInput as $CheckedUpdateInput,
+    CountArgs as $CountArgs,
+    CreateArgs as $CreateArgs,
+    CreateManyAndReturnArgs as $CreateManyAndReturnArgs,
+    CreateManyArgs as $CreateManyArgs,
+    DeleteArgs as $DeleteArgs,
+    DeleteManyArgs as $DeleteManyArgs,
+    ExistsArgs as $ExistsArgs,
+    FindFirstArgs as $FindFirstArgs,
+    FindManyArgs as $FindManyArgs,
+    FindUniqueArgs as $FindUniqueArgs,
+    GroupByArgs as $GroupByArgs,
+    IncludeInput as $IncludeInput,
+    OmitInput as $OmitInput,
+    QueryOptions as $QueryOptions,
+    SimplifiedPlainResult as $Result,
+    SelectIncludeOmit as $SelectIncludeOmit,
+    SelectInput as $SelectInput,
+    UncheckedCreateInput as $UncheckedCreateInput,
+    UncheckedUpdateInput as $UncheckedUpdateInput,
+    UpdateArgs as $UpdateArgs,
+    UpdateManyAndReturnArgs as $UpdateManyAndReturnArgs,
+    UpdateManyArgs as $UpdateManyArgs,
+    UpsertArgs as $UpsertArgs,
+    WhereInput as $WhereInput,
+} from "@zenstackhq/orm";
+import type { SchemaType as $Schema } from "./schema";
 export type DinnerPartyFindManyArgs = $FindManyArgs<$Schema, "DinnerParty">;
 export type DinnerPartyFindUniqueArgs = $FindUniqueArgs<$Schema, "DinnerParty">;
 export type DinnerPartyFindFirstArgs = $FindFirstArgs<$Schema, "DinnerParty">;
 export type DinnerPartyExistsArgs = $ExistsArgs<$Schema, "DinnerParty">;
 export type DinnerPartyCreateArgs = $CreateArgs<$Schema, "DinnerParty">;
 export type DinnerPartyCreateManyArgs = $CreateManyArgs<$Schema, "DinnerParty">;
-export type DinnerPartyCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "DinnerParty">;
+export type DinnerPartyCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "DinnerParty"
+>;
 export type DinnerPartyUpdateArgs = $UpdateArgs<$Schema, "DinnerParty">;
 export type DinnerPartyUpdateManyArgs = $UpdateManyArgs<$Schema, "DinnerParty">;
-export type DinnerPartyUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "DinnerParty">;
+export type DinnerPartyUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "DinnerParty"
+>;
 export type DinnerPartyUpsertArgs = $UpsertArgs<$Schema, "DinnerParty">;
 export type DinnerPartyDeleteArgs = $DeleteArgs<$Schema, "DinnerParty">;
 export type DinnerPartyDeleteManyArgs = $DeleteManyArgs<$Schema, "DinnerParty">;
@@ -28,46 +61,133 @@ export type DinnerPartyWhereInput = $WhereInput<$Schema, "DinnerParty">;
 export type DinnerPartySelect = $SelectInput<$Schema, "DinnerParty">;
 export type DinnerPartyInclude = $IncludeInput<$Schema, "DinnerParty">;
 export type DinnerPartyOmit = $OmitInput<$Schema, "DinnerParty">;
-export type DinnerPartyUncheckedCreateInput = $UncheckedCreateInput<$Schema, "DinnerParty">;
-export type DinnerPartyCheckedCreateInput = $CheckedCreateInput<$Schema, "DinnerParty">;
-export type DinnerPartyUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "DinnerParty">;
-export type DinnerPartyCheckedUpdateInput = $CheckedUpdateInput<$Schema, "DinnerParty">;
-export type DinnerPartyGetPayload<Args extends $SelectIncludeOmit<$Schema, "DinnerParty", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "DinnerParty", Args, Options>;
-export type DinnerPartyGuestFindManyArgs = $FindManyArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestFindUniqueArgs = $FindUniqueArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestFindFirstArgs = $FindFirstArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestExistsArgs = $ExistsArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestCreateArgs = $CreateArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestCreateManyArgs = $CreateManyArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUpdateArgs = $UpdateArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUpdateManyArgs = $UpdateManyArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUpsertArgs = $UpsertArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestDeleteArgs = $DeleteArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestDeleteManyArgs = $DeleteManyArgs<$Schema, "DinnerPartyGuest">;
+export type DinnerPartyUncheckedCreateInput = $UncheckedCreateInput<
+    $Schema,
+    "DinnerParty"
+>;
+export type DinnerPartyCheckedCreateInput = $CheckedCreateInput<
+    $Schema,
+    "DinnerParty"
+>;
+export type DinnerPartyUncheckedUpdateInput = $UncheckedUpdateInput<
+    $Schema,
+    "DinnerParty"
+>;
+export type DinnerPartyCheckedUpdateInput = $CheckedUpdateInput<
+    $Schema,
+    "DinnerParty"
+>;
+export type DinnerPartyGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "DinnerParty", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "DinnerParty", Args, Options>;
+export type DinnerPartyGuestFindManyArgs = $FindManyArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestFindUniqueArgs = $FindUniqueArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestFindFirstArgs = $FindFirstArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestExistsArgs = $ExistsArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestCreateArgs = $CreateArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestCreateManyArgs = $CreateManyArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestUpdateArgs = $UpdateArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestUpdateManyArgs = $UpdateManyArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestUpsertArgs = $UpsertArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestDeleteArgs = $DeleteArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestDeleteManyArgs = $DeleteManyArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
 export type DinnerPartyGuestCountArgs = $CountArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestAggregateArgs = $AggregateArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestGroupByArgs = $GroupByArgs<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestWhereInput = $WhereInput<$Schema, "DinnerPartyGuest">;
+export type DinnerPartyGuestAggregateArgs = $AggregateArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestGroupByArgs = $GroupByArgs<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestWhereInput = $WhereInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
 export type DinnerPartyGuestSelect = $SelectInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestInclude = $IncludeInput<$Schema, "DinnerPartyGuest">;
+export type DinnerPartyGuestInclude = $IncludeInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
 export type DinnerPartyGuestOmit = $OmitInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUncheckedCreateInput = $UncheckedCreateInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestCheckedCreateInput = $CheckedCreateInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestCheckedUpdateInput = $CheckedUpdateInput<$Schema, "DinnerPartyGuest">;
-export type DinnerPartyGuestGetPayload<Args extends $SelectIncludeOmit<$Schema, "DinnerPartyGuest", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "DinnerPartyGuest", Args, Options>;
+export type DinnerPartyGuestUncheckedCreateInput = $UncheckedCreateInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestCheckedCreateInput = $CheckedCreateInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestUncheckedUpdateInput = $UncheckedUpdateInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestCheckedUpdateInput = $CheckedUpdateInput<
+    $Schema,
+    "DinnerPartyGuest"
+>;
+export type DinnerPartyGuestGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "DinnerPartyGuest", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "DinnerPartyGuest", Args, Options>;
 export type UserFindManyArgs = $FindManyArgs<$Schema, "User">;
 export type UserFindUniqueArgs = $FindUniqueArgs<$Schema, "User">;
 export type UserFindFirstArgs = $FindFirstArgs<$Schema, "User">;
 export type UserExistsArgs = $ExistsArgs<$Schema, "User">;
 export type UserCreateArgs = $CreateArgs<$Schema, "User">;
 export type UserCreateManyArgs = $CreateManyArgs<$Schema, "User">;
-export type UserCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "User">;
+export type UserCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "User"
+>;
 export type UserUpdateArgs = $UpdateArgs<$Schema, "User">;
 export type UserUpdateManyArgs = $UpdateManyArgs<$Schema, "User">;
-export type UserUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "User">;
+export type UserUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "User"
+>;
 export type UserUpsertArgs = $UpsertArgs<$Schema, "User">;
 export type UserDeleteArgs = $DeleteArgs<$Schema, "User">;
 export type UserDeleteManyArgs = $DeleteManyArgs<$Schema, "User">;
@@ -82,17 +202,26 @@ export type UserUncheckedCreateInput = $UncheckedCreateInput<$Schema, "User">;
 export type UserCheckedCreateInput = $CheckedCreateInput<$Schema, "User">;
 export type UserUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "User">;
 export type UserCheckedUpdateInput = $CheckedUpdateInput<$Schema, "User">;
-export type UserGetPayload<Args extends $SelectIncludeOmit<$Schema, "User", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "User", Args, Options>;
+export type UserGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "User", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "User", Args, Options>;
 export type SessionFindManyArgs = $FindManyArgs<$Schema, "Session">;
 export type SessionFindUniqueArgs = $FindUniqueArgs<$Schema, "Session">;
 export type SessionFindFirstArgs = $FindFirstArgs<$Schema, "Session">;
 export type SessionExistsArgs = $ExistsArgs<$Schema, "Session">;
 export type SessionCreateArgs = $CreateArgs<$Schema, "Session">;
 export type SessionCreateManyArgs = $CreateManyArgs<$Schema, "Session">;
-export type SessionCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "Session">;
+export type SessionCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "Session"
+>;
 export type SessionUpdateArgs = $UpdateArgs<$Schema, "Session">;
 export type SessionUpdateManyArgs = $UpdateManyArgs<$Schema, "Session">;
-export type SessionUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "Session">;
+export type SessionUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "Session"
+>;
 export type SessionUpsertArgs = $UpsertArgs<$Schema, "Session">;
 export type SessionDeleteArgs = $DeleteArgs<$Schema, "Session">;
 export type SessionDeleteManyArgs = $DeleteManyArgs<$Schema, "Session">;
@@ -103,21 +232,36 @@ export type SessionWhereInput = $WhereInput<$Schema, "Session">;
 export type SessionSelect = $SelectInput<$Schema, "Session">;
 export type SessionInclude = $IncludeInput<$Schema, "Session">;
 export type SessionOmit = $OmitInput<$Schema, "Session">;
-export type SessionUncheckedCreateInput = $UncheckedCreateInput<$Schema, "Session">;
+export type SessionUncheckedCreateInput = $UncheckedCreateInput<
+    $Schema,
+    "Session"
+>;
 export type SessionCheckedCreateInput = $CheckedCreateInput<$Schema, "Session">;
-export type SessionUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "Session">;
+export type SessionUncheckedUpdateInput = $UncheckedUpdateInput<
+    $Schema,
+    "Session"
+>;
 export type SessionCheckedUpdateInput = $CheckedUpdateInput<$Schema, "Session">;
-export type SessionGetPayload<Args extends $SelectIncludeOmit<$Schema, "Session", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "Session", Args, Options>;
+export type SessionGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "Session", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "Session", Args, Options>;
 export type AccountFindManyArgs = $FindManyArgs<$Schema, "Account">;
 export type AccountFindUniqueArgs = $FindUniqueArgs<$Schema, "Account">;
 export type AccountFindFirstArgs = $FindFirstArgs<$Schema, "Account">;
 export type AccountExistsArgs = $ExistsArgs<$Schema, "Account">;
 export type AccountCreateArgs = $CreateArgs<$Schema, "Account">;
 export type AccountCreateManyArgs = $CreateManyArgs<$Schema, "Account">;
-export type AccountCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "Account">;
+export type AccountCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "Account"
+>;
 export type AccountUpdateArgs = $UpdateArgs<$Schema, "Account">;
 export type AccountUpdateManyArgs = $UpdateManyArgs<$Schema, "Account">;
-export type AccountUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "Account">;
+export type AccountUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "Account"
+>;
 export type AccountUpsertArgs = $UpsertArgs<$Schema, "Account">;
 export type AccountDeleteArgs = $DeleteArgs<$Schema, "Account">;
 export type AccountDeleteManyArgs = $DeleteManyArgs<$Schema, "Account">;
@@ -128,24 +272,51 @@ export type AccountWhereInput = $WhereInput<$Schema, "Account">;
 export type AccountSelect = $SelectInput<$Schema, "Account">;
 export type AccountInclude = $IncludeInput<$Schema, "Account">;
 export type AccountOmit = $OmitInput<$Schema, "Account">;
-export type AccountUncheckedCreateInput = $UncheckedCreateInput<$Schema, "Account">;
+export type AccountUncheckedCreateInput = $UncheckedCreateInput<
+    $Schema,
+    "Account"
+>;
 export type AccountCheckedCreateInput = $CheckedCreateInput<$Schema, "Account">;
-export type AccountUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "Account">;
+export type AccountUncheckedUpdateInput = $UncheckedUpdateInput<
+    $Schema,
+    "Account"
+>;
 export type AccountCheckedUpdateInput = $CheckedUpdateInput<$Schema, "Account">;
-export type AccountGetPayload<Args extends $SelectIncludeOmit<$Schema, "Account", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "Account", Args, Options>;
+export type AccountGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "Account", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "Account", Args, Options>;
 export type VerificationFindManyArgs = $FindManyArgs<$Schema, "Verification">;
-export type VerificationFindUniqueArgs = $FindUniqueArgs<$Schema, "Verification">;
+export type VerificationFindUniqueArgs = $FindUniqueArgs<
+    $Schema,
+    "Verification"
+>;
 export type VerificationFindFirstArgs = $FindFirstArgs<$Schema, "Verification">;
 export type VerificationExistsArgs = $ExistsArgs<$Schema, "Verification">;
 export type VerificationCreateArgs = $CreateArgs<$Schema, "Verification">;
-export type VerificationCreateManyArgs = $CreateManyArgs<$Schema, "Verification">;
-export type VerificationCreateManyAndReturnArgs = $CreateManyAndReturnArgs<$Schema, "Verification">;
+export type VerificationCreateManyArgs = $CreateManyArgs<
+    $Schema,
+    "Verification"
+>;
+export type VerificationCreateManyAndReturnArgs = $CreateManyAndReturnArgs<
+    $Schema,
+    "Verification"
+>;
 export type VerificationUpdateArgs = $UpdateArgs<$Schema, "Verification">;
-export type VerificationUpdateManyArgs = $UpdateManyArgs<$Schema, "Verification">;
-export type VerificationUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<$Schema, "Verification">;
+export type VerificationUpdateManyArgs = $UpdateManyArgs<
+    $Schema,
+    "Verification"
+>;
+export type VerificationUpdateManyAndReturnArgs = $UpdateManyAndReturnArgs<
+    $Schema,
+    "Verification"
+>;
 export type VerificationUpsertArgs = $UpsertArgs<$Schema, "Verification">;
 export type VerificationDeleteArgs = $DeleteArgs<$Schema, "Verification">;
-export type VerificationDeleteManyArgs = $DeleteManyArgs<$Schema, "Verification">;
+export type VerificationDeleteManyArgs = $DeleteManyArgs<
+    $Schema,
+    "Verification"
+>;
 export type VerificationCountArgs = $CountArgs<$Schema, "Verification">;
 export type VerificationAggregateArgs = $AggregateArgs<$Schema, "Verification">;
 export type VerificationGroupByArgs = $GroupByArgs<$Schema, "Verification">;
@@ -153,8 +324,23 @@ export type VerificationWhereInput = $WhereInput<$Schema, "Verification">;
 export type VerificationSelect = $SelectInput<$Schema, "Verification">;
 export type VerificationInclude = $IncludeInput<$Schema, "Verification">;
 export type VerificationOmit = $OmitInput<$Schema, "Verification">;
-export type VerificationUncheckedCreateInput = $UncheckedCreateInput<$Schema, "Verification">;
-export type VerificationCheckedCreateInput = $CheckedCreateInput<$Schema, "Verification">;
-export type VerificationUncheckedUpdateInput = $UncheckedUpdateInput<$Schema, "Verification">;
-export type VerificationCheckedUpdateInput = $CheckedUpdateInput<$Schema, "Verification">;
-export type VerificationGetPayload<Args extends $SelectIncludeOmit<$Schema, "Verification", true>, Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>> = $Result<$Schema, "Verification", Args, Options>;
+export type VerificationUncheckedCreateInput = $UncheckedCreateInput<
+    $Schema,
+    "Verification"
+>;
+export type VerificationCheckedCreateInput = $CheckedCreateInput<
+    $Schema,
+    "Verification"
+>;
+export type VerificationUncheckedUpdateInput = $UncheckedUpdateInput<
+    $Schema,
+    "Verification"
+>;
+export type VerificationCheckedUpdateInput = $CheckedUpdateInput<
+    $Schema,
+    "Verification"
+>;
+export type VerificationGetPayload<
+    Args extends $SelectIncludeOmit<$Schema, "Verification", true>,
+    Options extends $QueryOptions<$Schema> = $QueryOptions<$Schema>,
+> = $Result<$Schema, "Verification", Args, Options>;
