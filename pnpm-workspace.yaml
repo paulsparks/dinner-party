@@ -1,7 +1,9 @@
 allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  better-sqlite3: true
+  prisma: true
   sharp: true
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
-overrides:
-  kysely: "^0.28.17"
