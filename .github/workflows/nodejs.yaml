@@ -1,0 +1,27 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: pnpm/action-setup@v6
+      with:
+        version: 10
+    - name: Use Node.js 24
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        cache: "pnpm"
+    - name: Install secretspec
+      run: curl -sSL https://install.secretspec.dev | sh
+    - run: pnpm install --frozen-lockfile
+    - run: secretspec run --provider env -- pnpm run build
+      env:
+        BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
