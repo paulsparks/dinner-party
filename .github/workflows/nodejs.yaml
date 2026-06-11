@@ -9,6 +9,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
     - uses: actions/checkout@v6
     - uses: pnpm/action-setup@v6
@@ -22,6 +32,15 @@ jobs:
     - name: Install secretspec
       run: curl -sSL https://install.secretspec.dev | sh
     - run: pnpm install --frozen-lockfile
-    - run: secretspec run --provider env -- pnpm run build
+    - run: secretspec run --profile production --provider env -- pnpm run build
       env:
         BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    - run: pnpm run lint
+    - run: pnpm run generate
+    - run: pnpm run migrate
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
