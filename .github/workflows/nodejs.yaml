@@ -36,6 +36,7 @@ jobs:
     - run: secretspec run --profile production --provider env -- pnpm run build
       env:
         BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+        BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
