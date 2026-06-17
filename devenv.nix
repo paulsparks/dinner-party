@@ -30,14 +30,14 @@
     enable = true;
     initialDatabases = [
       {
-        name = "dinner-party";
-        user = "dinner-party";
-        pass = "dinner-party";
+        name = "postgres";
+        user = "postgres";
+        pass = "db-pass";
       }
     ];
     initialScript = ''
-      -- Give dinner-party access to create databases (useful for Prisma Shadow DB stuff)
-      ALTER USER "dinner-party" CREATEDB;
+      -- Give postgres access to create databases (useful for Prisma Shadow DB stuff)
+      ALTER USER "postgres" CREATEDB;
     '';
     listen_addresses = "0.0.0.0";
     port = 5432;

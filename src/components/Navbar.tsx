@@ -8,7 +8,7 @@ export function Navbar() {
 
     return (
         <div className="w-full outline-white/20 outline-1 shadow-xl p-4">
-            <div className="flex flex-row justify-between items-center h-full">
+            <div className="flex flex-row justify-around sm:justify-center items-center h-full">
                 <div className="flex flex-row gap-4 ">
                     {/* <ActionIcon
                         href="/"
@@ -19,10 +19,10 @@ export function Navbar() {
                         <HouseIcon size={24} />
                     </ActionIcon> */}
                 </div>
-                <Link href="/" className="text-5xl">
+                <Link href="/" className="text-xl sm:text-3xl md:text-5xl">
                     James and Paul Dinner Parties
                 </Link>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-row gap-4 sm:absolute right-4">
                     {user.role === "Admin" && (
                         <ActionIcon
                             href="/new-party"
