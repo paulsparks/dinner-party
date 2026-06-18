@@ -12,7 +12,9 @@ enum Role {
     Admin
 }
 
-procedure reserveSeat(partyId: Int): DinnerPartyGuest
+mutation procedure reserveSeat(partyId: Int): DinnerPartyGuest
+mutation procedure unReserveSeat(partyId: Int): Void
+procedure getGuestCount(partyId: Int): Int
 
 model DinnerParty {
     id          Int                @id @default(autoincrement())

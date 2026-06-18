@@ -778,6 +778,20 @@ export class SchemaType implements SchemaDef {
                 partyId: { name: "partyId", type: "Int" },
             },
             returnType: "DinnerPartyGuest",
+            mutation: true,
+        },
+        unReserveSeat: {
+            params: {
+                partyId: { name: "partyId", type: "Int" },
+            },
+            returnType: "Void",
+            mutation: true,
+        },
+        getGuestCount: {
+            params: {
+                partyId: { name: "partyId", type: "Int" },
+            },
+            returnType: "Int",
         },
     } as const;
     plugins = {};

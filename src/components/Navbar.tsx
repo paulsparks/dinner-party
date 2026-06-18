@@ -7,7 +7,7 @@ export function Navbar() {
     const { user } = useAuthenticatedContext();
 
     return (
-        <div className="w-full outline-white/20 outline-1 shadow-xl p-4">
+        <div className="w-full outline-white/20 outline-1 shadow-xl p-4 bg-navbar-background">
             <div className="flex flex-row justify-around sm:justify-center items-center h-full">
                 <div className="flex flex-row gap-4 ">
                     {/* <ActionIcon

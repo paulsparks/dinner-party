@@ -31,6 +31,12 @@ export const db = new ZenStackClient(schema, {
                 throw new Error("Specified party does not exist");
             }
 
+            if (party.guests.some((g) => g.userId === client.$auth?.id)) {
+                throw new Error(
+                    "You've already reserved a seat for this party",
+                );
+            }
+
             if (party.guests.length >= party.maxGuests) {
                 throw new Error("Party already has the max amount of guests");
             }
@@ -44,12 +50,61 @@ export const db = new ZenStackClient(schema, {
                 >
             > = db.dinnerPartyGuest.create({
                 data: {
-                    userId: client.$auth.id,
                     partyId: args.partyId,
+                    userId: client.$auth.id,
                 },
             });
 
             return query;
+        },
+        getGuestCount: async ({ client, args }) => {
+            if (!client.$auth?.id) {
+                throw new Error("Unauthorized");
+            }
+
+            const party = await db.dinnerParty.findUnique({
+                where: { id: args.partyId },
+                include: {
+                    guests: true,
+                },
+            });
+
+            if (!party) {
+                throw new Error("Specified party does not exist");
+            }
+
+            const count: number = party.guests.length;
+
+            return count;
+        },
+        unReserveSeat: async ({ client, args }) => {
+            if (!client.$auth?.id) {
+                throw new Error("Unauthorized");
+            }
+
+            const party = await db.dinnerParty.findUnique({
+                where: { id: args.partyId },
+                include: {
+                    guests: true,
+                },
+            });
+
+            if (!party) {
+                throw new Error("Specified party does not exist");
+            }
+
+            if (!party.guests.some((g) => g.userId === client.$auth?.id)) {
+                throw new Error("You have not reserved a seat for this party");
+            }
+
+            await db.dinnerPartyGuest.delete({
+                where: {
+                    partyId_userId: {
+                        partyId: args.partyId,
+                        userId: client.$auth.id,
+                    },
+                },
+            });
         },
     },
 });

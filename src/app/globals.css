@@ -2,6 +2,7 @@
 
 @theme inline {
     --color-background: #1c1106;
+    --color-navbar-background: #241607;
     --color-link: var(--mantine-color-orange-4);
     --color-accent: var(--mantine-color-orange-3);
     --color-warning: var(--mantine-color-red-4);
