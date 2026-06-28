@@ -27,7 +27,7 @@ detached state. These can be stopped by running `devenv processes down`.
 
 Next configure `secretspec` by running `secretspec config init` and selected both `env` and `development` as the profile using the interactive prompt. Then run the following `secretspec config provider add env "env://"` and `secretspec config provider add dotenv "dotenv://"`.
 
-Once you have the necessary background services running and secretspec configured, the application can be started in development mode by applying database migrations with `pnpm-s run db:migrate` and then running `pnpm-s run dev`. Note that the `pnpm-s` command is the same as the normal `pnpm` command, but with secrets injected into its environment via `secretspec`. Only commands that need secrets should be run with `secretspec run -- <cmd>` and/or `pnpm-s`.
+Once you have the necessary background services running and secretspec configured, the application can be started in development mode by applying database migrations with `pnpm-s migrate` and then running `pnpm-s dev`. Note that the `pnpm-s` command is the same as the normal `pnpm` command, but with secrets injected into its environment via `secretspec`. Only commands that need secrets should be run with `secretspec run -- <cmd>` and/or `pnpm-s`.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

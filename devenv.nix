@@ -2,16 +2,27 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 
 {
   dotenv.disableHint = true;
 
-  packages = [
-    pkgs.secretspec
+  packages = with pkgs; [
+    secretspec
+    prisma-engines_6
   ];
+
+  env = {
+    PRISMA_SCHEMA_ENGINE_BINARY =
+      "${pkgs.prisma-engines_6}/bin/schema-engine";
+
+    PRISMA_QUERY_ENGINE_BINARY =
+      "${pkgs.prisma-engines_6}/bin/query-engine";
+
+    PRISMA_FMT_BINARY =
+      "${pkgs.prisma-engines_6}/bin/prisma-fmt";
+  };
 
   languages.javascript = {
     enable = true;
@@ -38,6 +49,7 @@
     initialScript = ''
       -- Give postgres access to create databases (useful for Prisma Shadow DB stuff)
       ALTER USER "postgres" CREATEDB;
+      GRANT CREATE ON SCHEMA public TO "postgres";
     '';
     listen_addresses = "0.0.0.0";
     port = 5432;
