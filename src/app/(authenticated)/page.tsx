@@ -28,7 +28,7 @@ export default function Home() {
                         key={dinnerParty.id}
                         href={`/rsvp/${dinnerParty.id}`}
                     >
-                        <p className="mb-2 text-xl sm:text-3xl">
+                        <p className="mb-2 text-xl sm:text-2xl">
                             {formatDate(dinnerParty.dateTime)}
                         </p>
 
