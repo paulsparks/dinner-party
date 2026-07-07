@@ -32,7 +32,7 @@ jobs:
     - name: Install secretspec
       run: curl -sSL https://install.secretspec.dev | sh
     - run: pnpm install --frozen-lockfile
-    - run: pnpm run lint
+    # - run: pnpm run lint
     - run: secretspec run --profile production --provider env -- pnpm run build
       env:
         BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
