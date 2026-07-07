@@ -11,6 +11,7 @@
   packages = with pkgs; [
     secretspec
     prisma-engines_6
+    biome
   ];
 
   env = {
@@ -22,6 +23,8 @@
 
     PRISMA_FMT_BINARY =
       "${pkgs.prisma-engines_6}/bin/prisma-fmt";
+
+    BIOME_BINARY = "${pkgs.biome}/bin/biome";
   };
 
   languages.javascript = {
