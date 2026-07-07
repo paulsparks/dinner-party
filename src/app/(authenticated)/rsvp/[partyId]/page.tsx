@@ -1,8 +1,10 @@
 "use client";
 
-import { Button } from "@mantine/core";
+import { ActionIcon, Button, Popover } from "@mantine/core";
+import { TrashIcon } from "@phosphor-icons/react";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
-import { use, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { use, useCallback, useMemo, useState } from "react";
 import { FullscreenLoader } from "@/components/FullscreenLoader";
 import { useAuthenticatedContext } from "@/contexts/AuthenticatedContext";
 import { formatDate } from "@/lib/formatDate";
@@ -16,6 +18,8 @@ export default function RsvpPage({
     const { partyId } = use(params);
     const client = useClientQueries(schema);
     const { user } = useAuthenticatedContext();
+    const [opened, setOpened] = useState(false);
+    const router = useRouter();
 
     const {
         data: dinnerParty,
@@ -51,6 +55,8 @@ export default function RsvpPage({
         mutateAsync: unRsvp,
         isPending: unRsvpPending,
     } = client.$procs.unReserveSeat.useMutation();
+
+    const { mutateAsync: deleteDinnerParty } = client.dinnerParty.useDelete();
 
     const reservedAlready = useMemo(
         () => dinnerParty?.guests.some((g) => g.userId === user.id),
@@ -108,11 +114,60 @@ export default function RsvpPage({
                 "Party not found"
             ) : (
                 <>
-                    <div className="flex flex-col items-center">
-                        <h1 className="text-2xl sm:text-4xl">
+                    {user.role === "Admin" && (
+                        <Popover
+                            width={300}
+                            trapFocus
+                            position="bottom"
+                            withArrow
+                            shadow="md"
+                            opened={opened}
+                            onChange={setOpened}
+                        >
+                            <Popover.Target>
+                                <ActionIcon
+                                    variant="outline"
+                                    color="red"
+                                    className="absolute! right-4 top-22"
+                                    size="lg"
+                                    onClick={() => {
+                                        setOpened(true);
+                                    }}
+                                >
+                                    <TrashIcon size={24} />
+                                </ActionIcon>
+                            </Popover.Target>
+                            <Popover.Dropdown className="flex flex-col gap-2 w-44!">
+                                <p>Are you sure?</p>
+                                <div className="flex gap-2">
+                                    <Button
+                                        variant="outline"
+                                        color="red"
+                                        onClick={() => {
+                                            deleteDinnerParty({
+                                                where: { id: Number(partyId) },
+                                            }).then(() => router.push("/"));
+                                        }}
+                                    >
+                                        Yes
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => {
+                                            setOpened(false);
+                                        }}
+                                    >
+                                        Cancel
+                                    </Button>
+                                </div>
+                            </Popover.Dropdown>
+                        </Popover>
+                    )}
+                    <div className="flex flex-col items-center gap-4">
+                        <h1 className="text-4xl sm:text-5xl">
                             {formatDate(dinnerParty.dateTime)}
                         </h1>
-                        <p className="text-lg sm:text-2xl">
+                        <p className="text-lg px-4 sm:p-0 sm:w-xl md:w-2xl xl:w-5xl sm:text-2xl text-center">
                             {dinnerParty.description}
                         </p>
                     </div>

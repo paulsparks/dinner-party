@@ -48,7 +48,7 @@ export default function LoginPage() {
     );
 
     return (
-        <div className="flex flex-col gap-10 justify-start items-center">
+        <div className="flex flex-col gap-10 justify-start items-center p-6">
             <h1 className="text-4xl mt-10">Sign In</h1>
             <form
                 onSubmit={form.onSubmit(onSubmit)}

@@ -61,7 +61,7 @@ export default function SignUpPage() {
     );
 
     return (
-        <div className="flex flex-col gap-10 justify-start items-center">
+        <div className="flex flex-col gap-10 justify-start items-center p-6">
             <h1 className="text-4xl mt-10">Create Account</h1>
             <form
                 onSubmit={form.onSubmit(onSubmit)}

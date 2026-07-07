@@ -28,9 +28,9 @@ model DinnerParty {
 }
 
 model DinnerPartyGuest {
-    party   DinnerParty @relation(fields: [partyId], references: [id])
+    party   DinnerParty @relation(fields: [partyId], references: [id], onDelete: Cascade)
     partyId Int
-    user    User        @relation(fields: [userId], references: [id])
+    user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId  String
 
     @@id([partyId, userId])
