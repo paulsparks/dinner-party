@@ -37,12 +37,12 @@ export default function Home() {
                         </p>
 
                         <Button
-                            className="text-xl! sm:text-3xl!"
+                            className="text-md! sm:text-xl!"
                             variant="outline"
                             fullWidth
                             mt="md"
                         >
-                            Rsvp
+                            View Party
                         </Button>
                     </Card>
                 ))}
