@@ -22,11 +22,9 @@ export default function Home() {
                 ?.sort((a, b) => b.dateTime.getTime() - a.dateTime.getTime())
                 .map((dinnerParty) => (
                     <Card
-                        component={Link}
                         className="w-72 sm:w-96 p-4! shadow-sm!"
                         withBorder
                         key={dinnerParty.id}
-                        href={`/rsvp/${dinnerParty.id}`}
                     >
                         <p className="mb-2 text-xl sm:text-2xl">
                             {formatDate(dinnerParty.dateTime)}
@@ -37,6 +35,8 @@ export default function Home() {
                         </p>
 
                         <Button
+                            component={Link}
+                            href={`/rsvp/${dinnerParty.id}`}
                             className="text-md! sm:text-xl!"
                             variant="outline"
                             fullWidth
