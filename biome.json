@@ -3,7 +3,7 @@
     "vcs": {
         "enabled": true,
         "clientKind": "git",
-        "useIgnoreFile": true
+        "useIgnoreFile": false
     },
     "files": {
         "ignoreUnknown": true,
@@ -35,11 +35,6 @@
             "source": {
                 "organizeImports": "on"
             }
-        }
-    },
-    "css": {
-        "parser": {
-            "tailwindDirectives": true
         }
     }
 }

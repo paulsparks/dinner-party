@@ -23,6 +23,11 @@ export const auth = betterAuth({
                 defaultValue: "User",
                 input: false,
             },
+            approved: {
+                type: "boolean",
+                defaultValue: false,
+                input: false,
+            },
         },
     },
 });

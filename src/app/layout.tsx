@@ -4,6 +4,7 @@ import { Jacquard_24 } from "next/font/google";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { Providers } from "@/components/Providers";
 
 const font = Jacquard_24({

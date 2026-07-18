@@ -106,6 +106,29 @@ export const db = new ZenStackClient(schema, {
                 },
             });
         },
+        tryAccessCode: async ({ client, args }) => {
+            const userId = client.$auth?.id;
+
+            if (!userId) {
+                throw new Error("Unauthorized");
+            }
+
+            const codeWorks = !!(await client.accessCode.findUnique({
+                where: { code: args.accessCode },
+            }));
+
+            if (codeWorks) {
+                await db.$transaction([
+                    db.user.update({
+                        where: { id: userId },
+                        data: { approved: true },
+                    }),
+                    db.accessCode.delete({ where: { code: args.accessCode } }),
+                ]);
+            }
+
+            return codeWorks;
+        },
     },
 });
 

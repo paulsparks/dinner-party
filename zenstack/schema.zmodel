@@ -14,6 +14,7 @@ enum Role {
 
 mutation procedure reserveSeat(partyId: Int): DinnerPartyGuest
 mutation procedure unReserveSeat(partyId: Int): Void
+mutation procedure tryAccessCode(accessCode: String): Boolean
 procedure getGuestCount(partyId: Int): Int
 
 model DinnerParty {
@@ -23,7 +24,7 @@ model DinnerParty {
     description String?
     guests      DinnerPartyGuest[]
 
-    @@allow('read', true)
+    @@allow('read', auth().approved)
     @@allow('all', auth().role == Admin)
 }
 
@@ -39,6 +40,12 @@ model DinnerPartyGuest {
     @@allow('delete', userId == auth().id)
 }
 
+model AccessCode {
+    code String @id @default(nanoid(8))
+
+    @@allow('all', auth().role == Admin)
+}
+
 model User {
     id            String             @id @default(cuid())
     email         String             @unique @email @length(6, 32)
@@ -51,6 +58,7 @@ model User {
     sessions      Session[]
     accounts      Account[]
     guestEntries  DinnerPartyGuest[]
+    approved      Boolean            @default(false)
 
 
     @@map('user')

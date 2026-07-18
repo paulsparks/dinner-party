@@ -1,6 +1,7 @@
 "use client";
 
 import { MantineProvider, type MantineProviderProps } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { QuerySettingsProvider } from "@zenstackhq/tanstack-query/react";
 import { Jacquard_24 } from "next/font/google";
@@ -22,6 +23,7 @@ const queryClient = new QueryClient();
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <MantineProvider theme={mantineTheme} defaultColorScheme="dark">
+            <Notifications />
             <QueryClientProvider client={queryClient}>
                 <QuerySettingsProvider value={{ endpoint: "/api/model" }}>
                     {children}
