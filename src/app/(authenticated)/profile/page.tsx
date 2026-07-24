@@ -1,7 +1,7 @@
 "use client";
 
 import { ActionIcon, Button } from "@mantine/core";
-import { TrashIcon } from "@phosphor-icons/react";
+import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
 import Link from "next/link";
 import { useAuthenticatedContext } from "@/contexts/AuthenticatedContext";
@@ -16,7 +16,17 @@ export default function ProfilePage() {
     const { mutateAsync: deleteAccessCode } = client.accessCode.useDelete();
 
     return (
-        <div className="flex flex-col items-center gap-6">
+        <div className="relative flex flex-col items-center gap-6">
+            <ActionIcon
+                className="absolute! top-0 right-0"
+                variant="outline"
+                size="lg"
+                component={Link}
+                href="/profile/edit"
+                aria-label="Edit Profile"
+            >
+                <PencilSimpleIcon size={18} />
+            </ActionIcon>
             <h1 className="text-4xl">Profile</h1>
             <div className="flex flex-col gap-1 mt-6 text-xl items-center">
                 <p>Name: {user.name}</p>

@@ -109,7 +109,7 @@ export default function RsvpPage({
     }
 
     return (
-        <div className="flex flex-col items-center gap-6">
+        <div className="relative flex flex-col items-center gap-6">
             {!(dinnerParty && (guestCount !== undefined || null)) ? (
                 "Party not found"
             ) : (
@@ -128,13 +128,13 @@ export default function RsvpPage({
                                 <ActionIcon
                                     variant="outline"
                                     color="red"
-                                    className="absolute! right-4 top-22"
+                                    className="absolute! top-0 right-0"
                                     size="lg"
                                     onClick={() => {
                                         setOpened(true);
                                     }}
                                 >
-                                    <TrashIcon size={24} />
+                                    <TrashIcon size={18} />
                                 </ActionIcon>
                             </Popover.Target>
                             <Popover.Dropdown className="flex flex-col gap-2 w-44!">

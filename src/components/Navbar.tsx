@@ -30,7 +30,7 @@ export function Navbar() {
                             variant="outline"
                             size="lg"
                         >
-                            <WineIcon size={24} />
+                            <WineIcon size={18} />
                         </ActionIcon>
                     )}
                     <ActionIcon
@@ -40,7 +40,7 @@ export function Navbar() {
                         className="rounded-full!"
                         size="lg"
                     >
-                        <UserIcon size={24} />
+                        <UserIcon size={18} />
                     </ActionIcon>
                 </div>
             </div>
