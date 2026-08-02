@@ -21,6 +21,10 @@ export class SchemaType implements SchemaDef {
                     attributes: [{ name: "@id" }, { name: "@default", args: [{ name: "value", value: ExpressionUtils.call("autoincrement") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("autoincrement") as FieldDefault
                 },
+                title: {
+                    name: "title",
+                    type: "String"
+                },
                 maxGuests: {
                     name: "maxGuests",
                     type: "Int"

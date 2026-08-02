@@ -1,7 +1,20 @@
 "use client";
 
-import { ActionIcon, Button, Popover } from "@mantine/core";
-import { TrashIcon } from "@phosphor-icons/react";
+import {
+    ActionIcon,
+    Badge,
+    Button,
+    Card,
+    Divider,
+    Popover,
+    Progress,
+} from "@mantine/core";
+import {
+    CalendarBlankIcon,
+    CheckCircleIcon,
+    TrashIcon,
+    UsersIcon,
+} from "@phosphor-icons/react";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
 import { useRouter } from "next/navigation";
 import { use, useCallback, useMemo, useState } from "react";
@@ -61,6 +74,14 @@ export default function RsvpPage({
     const reservedAlready = useMemo(
         () => dinnerParty?.guests.some((g) => g.userId === user.id),
         [dinnerParty, user],
+    );
+
+    const isFull = useMemo(
+        () =>
+            !!dinnerParty &&
+            guestCount !== undefined &&
+            guestCount >= dinnerParty.maxGuests,
+        [dinnerParty, guestCount],
     );
 
     const onClick = useCallback(async () => {
@@ -163,51 +184,98 @@ export default function RsvpPage({
                             </Popover.Dropdown>
                         </Popover>
                     )}
-                    <div className="flex flex-col items-center gap-4">
-                        <h1 className="text-4xl sm:text-5xl">
-                            {formatDate(dinnerParty.dateTime)}
-                        </h1>
-                        <p className="text-lg px-4 sm:p-0 sm:w-xl md:w-2xl xl:w-5xl sm:text-2xl text-center">
-                            {dinnerParty.description}
-                        </p>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center">
-                        <p className="text-xl sm:text-3xl text-center">
-                            Guests: {guestCount}/{dinnerParty.maxGuests}
-                        </p>
-                        <Button
-                            className="text-xl! sm:text-2xl! w-60!"
-                            variant="outline"
-                            fullWidth
-                            loading={rsvpPending || unRsvpPending}
-                            onClick={onClick}
-                        >
-                            {reservedAlready ? "Cancel Reservation" : "Rsvp"}
-                        </Button>
-                        {reservedAlready && (
-                            <p className="text-xl">
-                                You are attending this dinner party!
-                            </p>
+                    <Card
+                        withBorder
+                        className="w-full sm:w-md md:w-xl p-6! sm:p-8! shadow-sm! flex flex-col items-center gap-4!"
+                    >
+                        <div className="flex flex-col items-center gap-2 text-center">
+                            <h1 className="text-3xl sm:text-4xl wrap-break-word">
+                                {dinnerParty.title}
+                            </h1>
+                            <div className="flex items-center gap-2 text-base sm:text-lg opacity-70">
+                                <CalendarBlankIcon size={18} />
+                                <span>{formatDate(dinnerParty.dateTime)}</span>
+                            </div>
+                        </div>
+
+                        {dinnerParty.description && (
+                            <>
+                                <Divider className="w-full" />
+                                <p className="text-lg sm:text-xl text-center wrap-break-word">
+                                    {dinnerParty.description}
+                                </p>
+                            </>
                         )}
-                        {rsvpFailureReason && (
-                            <p className="text-warning">
-                                {(
-                                    rsvpFailureReason as unknown as {
-                                        info: { message: string };
+
+                        <Divider className="w-full" />
+
+                        <div className="flex flex-col gap-3 items-center w-full">
+                            <div className="flex flex-col gap-2 items-center w-full max-w-64">
+                                <div className="flex items-center gap-2 text-lg sm:text-xl">
+                                    <UsersIcon size={20} />
+                                    <span>
+                                        Guests: {guestCount}/
+                                        {dinnerParty.maxGuests}
+                                    </span>
+                                    {isFull && (
+                                        <Badge color="red" variant="light">
+                                            Full
+                                        </Badge>
+                                    )}
+                                </div>
+                                <Progress
+                                    className="w-full"
+                                    value={
+                                        ((guestCount ?? 0) /
+                                            dinnerParty.maxGuests) *
+                                        100
                                     }
-                                )?.info?.message ?? rsvpFailureReason.message}
-                            </p>
-                        )}
-                        {unRsvpFailureReason && (
-                            <p className="text-warning">
-                                {(
-                                    unRsvpFailureReason as unknown as {
-                                        info: { message: string };
-                                    }
-                                )?.info?.message ?? unRsvpFailureReason.message}
-                            </p>
-                        )}
-                    </div>
+                                    color={isFull ? "red" : "orange"}
+                                    size="md"
+                                    radius="xl"
+                                />
+                            </div>
+
+                            <Button
+                                className="text-xl! sm:text-2xl! w-60! mt-2"
+                                variant="outline"
+                                color={reservedAlready ? "red" : undefined}
+                                fullWidth
+                                loading={rsvpPending || unRsvpPending}
+                                onClick={onClick}
+                            >
+                                {reservedAlready
+                                    ? "Cancel Reservation"
+                                    : "Rsvp"}
+                            </Button>
+                            {reservedAlready && (
+                                <div className="flex items-center gap-2 text-lg sm:text-xl text-accent">
+                                    <CheckCircleIcon size={20} weight="fill" />
+                                    <p>You are attending this dinner party!</p>
+                                </div>
+                            )}
+                            {rsvpFailureReason && (
+                                <p className="text-warning text-center">
+                                    {(
+                                        rsvpFailureReason as unknown as {
+                                            info: { message: string };
+                                        }
+                                    )?.info?.message ??
+                                        rsvpFailureReason.message}
+                                </p>
+                            )}
+                            {unRsvpFailureReason && (
+                                <p className="text-warning text-center">
+                                    {(
+                                        unRsvpFailureReason as unknown as {
+                                            info: { message: string };
+                                        }
+                                    )?.info?.message ??
+                                        unRsvpFailureReason.message}
+                                </p>
+                            )}
+                        </div>
+                    </Card>
                 </>
             )}
         </div>

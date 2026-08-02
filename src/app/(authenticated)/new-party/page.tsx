@@ -38,6 +38,9 @@ function parseFormDate(dateStr: string): Date {
 }
 
 const dinnerPartySchema = z.object({
+    title: z.string({ error: "Title is required." }).min(1, {
+        error: "Title is required.",
+    }),
     dateTime: z
         .string({ error: "Date is required." })
         .regex(
@@ -76,6 +79,7 @@ export default function NewPartyPage() {
             return createDinnerParty(
                 {
                     data: {
+                        title: values.title,
                         dateTime: parseFormDate(values.dateTime),
                         maxGuests: Number(values.maxGuests),
                         description: values.description,
@@ -103,6 +107,13 @@ export default function NewPartyPage() {
                 onSubmit={form.onSubmit(onSubmit)}
                 className="flex flex-col w-full sm:w-xs"
             >
+                <TextInput
+                    withAsterisk
+                    label="Title"
+                    placeholder="Title"
+                    key={form.key("title")}
+                    {...form.getInputProps("title")}
+                />
                 <TextInput
                     withAsterisk
                     label="Date (mm/dd/yyyy 12:00pm)"

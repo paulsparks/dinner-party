@@ -26,7 +26,10 @@ export default function Home() {
                         withBorder
                         key={dinnerParty.id}
                     >
-                        <p className="mb-2 text-xl sm:text-2xl">
+                        <p className="text-xl sm:text-2xl wrap-break-word">
+                            {dinnerParty.title}
+                        </p>
+                        <p className="mb-2 text-sm sm:text-base opacity-70">
                             {formatDate(dinnerParty.dateTime)}
                         </p>
 

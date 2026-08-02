@@ -42,6 +42,14 @@ export default function ProfilePage() {
             </div>
             <h1 className="text-4xl">Access Codes</h1>
             <div className="flex flex-col gap-1 text-xl items-center">
+                <Button
+                    className="text-xl! sm:text-2xl! w-60! mb-6"
+                    variant="outline"
+                    onClick={() => createAccessCode({ data: {} })}
+                >
+                    Create new code
+                </Button>
+
                 {accessCodes?.map(({ code }) => (
                     <div
                         key={code}
@@ -61,14 +69,6 @@ export default function ProfilePage() {
                         </ActionIcon>
                     </div>
                 ))}
-
-                <Button
-                    className="text-xl! sm:text-2xl! w-60! mt-6"
-                    variant="outline"
-                    onClick={() => createAccessCode({ data: {} })}
-                >
-                    Create new code
-                </Button>
             </div>
         </div>
     );

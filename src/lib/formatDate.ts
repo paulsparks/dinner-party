@@ -1,3 +1,7 @@
 export function formatDate(date: Date) {
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString().replace("AM", "am").replace("PM", "pm")}`;
+    const timeStr = date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+    });
+    return `${date.toLocaleDateString()} ${timeStr.replace("AM", "am").replace("PM", "pm")}`;
 }

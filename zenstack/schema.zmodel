@@ -19,6 +19,7 @@ procedure getGuestCount(partyId: Int): Int
 
 model DinnerParty {
     id          Int                @id @default(autoincrement())
+    title       String
     maxGuests   Int
     dateTime    DateTime
     description String?
