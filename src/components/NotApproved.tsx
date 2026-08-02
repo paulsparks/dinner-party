@@ -1,5 +1,6 @@
 import { Button, TextInput } from "@mantine/core";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
+import Link from "next/link";
 import { useState } from "react";
 import { schema } from "~/zenstack/schema";
 
@@ -40,6 +41,15 @@ export default function NotApproved({
                 }}
             >
                 Submit
+            </Button>
+            <Button
+                component={Link}
+                href="/sign-out"
+                variant="outline"
+                className="w-40!"
+                color="red"
+            >
+                Sign Out
             </Button>
         </div>
     );

@@ -43,10 +43,101 @@ export class SchemaType implements SchemaDef {
                     type: "DinnerPartyGuest",
                     array: true,
                     relation: { opposite: "party" }
+                },
+                comments: {
+                    name: "comments",
+                    type: "Comment",
+                    array: true,
+                    relation: { opposite: "party" }
                 }
             },
             attributes: [
                 { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.member(ExpressionUtils.call("auth"), ["approved"]) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("all") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.call("auth"), ["role"]), "==", ExpressionUtils.literal("Admin")) }] }
+            ] as readonly AttributeApplication[],
+            idFields: ["id"],
+            uniqueFields: {
+                id: { type: "Int" }
+            }
+        },
+        Comment: {
+            name: "Comment",
+            fields: {
+                id: {
+                    name: "id",
+                    type: "Int",
+                    id: true,
+                    attributes: [{ name: "@id" }, { name: "@default", args: [{ name: "value", value: ExpressionUtils.call("autoincrement") }] }] as readonly AttributeApplication[],
+                    default: ExpressionUtils.call("autoincrement") as FieldDefault
+                },
+                content: {
+                    name: "content",
+                    type: "String",
+                    attributes: [{ name: "@length", args: [{ name: "min", value: ExpressionUtils.literal(1) }, { name: "max", value: ExpressionUtils.literal(2000) }] }] as readonly AttributeApplication[]
+                },
+                createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
+                    default: ExpressionUtils.call("now") as FieldDefault
+                },
+                party: {
+                    name: "party",
+                    type: "DinnerParty",
+                    attributes: [{ name: "@relation", args: [{ name: "fields", value: ExpressionUtils.array("Int", [ExpressionUtils.field("partyId")]) }, { name: "references", value: ExpressionUtils.array("Int", [ExpressionUtils.field("id")]) }, { name: "onDelete", value: ExpressionUtils.literal("Cascade") }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "comments", fields: ["partyId"], references: ["id"], onDelete: "Cascade" }
+                },
+                partyId: {
+                    name: "partyId",
+                    type: "Int",
+                    foreignKeyFor: [
+                        "party"
+                    ] as readonly string[]
+                },
+                author: {
+                    name: "author",
+                    type: "User",
+                    attributes: [{ name: "@relation", args: [{ name: "fields", value: ExpressionUtils.array("String", [ExpressionUtils.field("authorId")]) }, { name: "references", value: ExpressionUtils.array("String", [ExpressionUtils.field("id")]) }, { name: "onDelete", value: ExpressionUtils.literal("Cascade") }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "comments", fields: ["authorId"], references: ["id"], onDelete: "Cascade" }
+                },
+                authorId: {
+                    name: "authorId",
+                    type: "String",
+                    foreignKeyFor: [
+                        "author"
+                    ] as readonly string[]
+                },
+                authorName: {
+                    name: "authorName",
+                    type: "String"
+                },
+                parent: {
+                    name: "parent",
+                    type: "Comment",
+                    optional: true,
+                    attributes: [{ name: "@relation", args: [{ name: "name", value: ExpressionUtils.literal("CommentReplies") }, { name: "fields", value: ExpressionUtils.array("Int", [ExpressionUtils.field("parentId")]) }, { name: "references", value: ExpressionUtils.array("Int", [ExpressionUtils.field("id")]) }, { name: "onDelete", value: ExpressionUtils.literal("Cascade") }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "replies", name: "CommentReplies", fields: ["parentId"], references: ["id"], onDelete: "Cascade" }
+                },
+                parentId: {
+                    name: "parentId",
+                    type: "Int",
+                    optional: true,
+                    foreignKeyFor: [
+                        "parent"
+                    ] as readonly string[]
+                },
+                replies: {
+                    name: "replies",
+                    type: "Comment",
+                    array: true,
+                    attributes: [{ name: "@relation", args: [{ name: "name", value: ExpressionUtils.literal("CommentReplies") }] }] as readonly AttributeApplication[],
+                    relation: { opposite: "parent", name: "CommentReplies" }
+                }
+            },
+            attributes: [
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.member(ExpressionUtils.call("auth"), ["approved"]) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("create") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.call("auth"), ["approved"]), "&&", ExpressionUtils.binary(ExpressionUtils.field("authorId"), "==", ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]))) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("delete") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("authorId"), "==", ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"])) }] },
                 { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("all") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.call("auth"), ["role"]), "==", ExpressionUtils.literal("Admin")) }] }
             ] as readonly AttributeApplication[],
             idFields: ["id"],
@@ -183,6 +274,12 @@ export class SchemaType implements SchemaDef {
                     type: "DinnerPartyGuest",
                     array: true,
                     relation: { opposite: "user" }
+                },
+                comments: {
+                    name: "comments",
+                    type: "Comment",
+                    array: true,
+                    relation: { opposite: "author" }
                 },
                 approved: {
                     name: "approved",

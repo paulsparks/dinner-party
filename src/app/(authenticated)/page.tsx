@@ -27,7 +27,7 @@ export default function Home() {
                 .sort((a, b) => a.dateTime.getTime() - b.dateTime.getTime())
                 .map((dinnerParty) => (
                     <Card
-                        className="party-card w-72 sm:w-96 p-5! shadow-sm!"
+                        className="w-72 sm:w-96 p-5! shadow-sm!"
                         withBorder
                         key={dinnerParty.id}
                     >
