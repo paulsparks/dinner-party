@@ -24,8 +24,28 @@ model DinnerParty {
     dateTime    DateTime
     description String?
     guests      DinnerPartyGuest[]
+    comments    Comment[]
 
     @@allow('read', auth().approved)
+    @@allow('all', auth().role == Admin)
+}
+
+model Comment {
+    id         Int         @id @default(autoincrement())
+    content    String      @length(1, 2000)
+    createdAt  DateTime    @default(now())
+    party      DinnerParty @relation(fields: [partyId], references: [id], onDelete: Cascade)
+    partyId    Int
+    author     User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId   String
+    authorName String
+    parent     Comment?    @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+    parentId   Int?
+    replies    Comment[]   @relation("CommentReplies")
+
+    @@allow('read', auth().approved)
+    @@allow('create', auth().approved && authorId == auth().id)
+    @@allow('delete', authorId == auth().id)
     @@allow('all', auth().role == Admin)
 }
 
@@ -59,6 +79,7 @@ model User {
     sessions      Session[]
     accounts      Account[]
     guestEntries  DinnerPartyGuest[]
+    comments      Comment[]
     approved      Boolean            @default(false)
 
 

@@ -17,6 +17,7 @@ import {
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
 import { useRouter } from "next/navigation";
 import { use, useCallback, useMemo, useState } from "react";
+import { CommentSection } from "@/components/CommentSection";
 import { FullscreenLoader } from "@/components/FullscreenLoader";
 import { useAuthenticatedContext } from "@/contexts/AuthenticatedContext";
 import { formatDate } from "@/lib/formatDate";
@@ -268,6 +269,7 @@ export default function RsvpPage({
                     </div>
                 </Card>
             )}
+            {dinnerParty && <CommentSection partyId={dinnerParty.id} />}
         </div>
     );
 }

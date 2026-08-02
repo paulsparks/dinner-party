@@ -1,14 +1,10 @@
-import {
-    type CrudReturnType,
-    ZenStackClient,
-    type ZenStackPromise,
-} from "@zenstackhq/orm";
+import { type ClientContract, ZenStackClient } from "@zenstackhq/orm";
 import { PostgresDialect } from "@zenstackhq/orm/dialects/postgres";
 import { PolicyPlugin } from "@zenstackhq/plugin-policy";
 import { Pool } from "pg";
 import { type SchemaType, schema } from "~/zenstack/schema";
 
-export const db = new ZenStackClient(schema, {
+export const db: ClientContract<SchemaType> = new ZenStackClient(schema, {
     dialect: new PostgresDialect({
         pool: new Pool({
             connectionString: process.env.DATABASE_URL,
@@ -41,21 +37,12 @@ export const db = new ZenStackClient(schema, {
                 throw new Error("Party already has the max amount of guests");
             }
 
-            const query: ZenStackPromise<
-                CrudReturnType<
-                    SchemaType,
-                    "DinnerPartyGuest",
-                    "create",
-                    { data: { userId: string; partyId: number } }
-                >
-            > = db.dinnerPartyGuest.create({
+            return db.dinnerPartyGuest.create({
                 data: {
                     partyId: args.partyId,
                     userId: client.$auth.id,
                 },
             });
-
-            return query;
         },
         getGuestCount: async ({ client, args }) => {
             if (!client.$auth?.id) {
@@ -113,7 +100,7 @@ export const db = new ZenStackClient(schema, {
                 throw new Error("Unauthorized");
             }
 
-            const codeWorks = !!(await client.accessCode.findUnique({
+            const codeWorks = !!(await db.accessCode.findUnique({
                 where: { code: args.accessCode },
             }));
 
