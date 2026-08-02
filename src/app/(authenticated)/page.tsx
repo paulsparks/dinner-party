@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Card } from "@mantine/core";
+import { Button, Card, Divider } from "@mantine/core";
+import { CalendarBlankIcon } from "@phosphor-icons/react";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
 import Link from "next/link";
 import { FullscreenLoader } from "@/components/FullscreenLoader";
@@ -19,23 +20,33 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center gap-4">
             {dinnerParties
-                ?.sort((a, b) => b.dateTime.getTime() - a.dateTime.getTime())
+                ?.filter(
+                    (dinnerParty) =>
+                        dinnerParty.dateTime.getTime() >= Date.now(),
+                )
+                .sort((a, b) => a.dateTime.getTime() - b.dateTime.getTime())
                 .map((dinnerParty) => (
                     <Card
-                        className="w-72 sm:w-96 p-4! shadow-sm!"
+                        className="party-card w-72 sm:w-96 p-5! shadow-sm!"
                         withBorder
                         key={dinnerParty.id}
                     >
                         <p className="text-xl sm:text-2xl wrap-break-word">
                             {dinnerParty.title}
                         </p>
-                        <p className="mb-2 text-sm sm:text-base opacity-70">
-                            {formatDate(dinnerParty.dateTime)}
-                        </p>
+                        <div className="flex items-center gap-2 text-sm sm:text-base opacity-70 mb-2">
+                            <CalendarBlankIcon size={16} />
+                            <span>{formatDate(dinnerParty.dateTime)}</span>
+                        </div>
 
-                        <p className="wrap-break-word">
-                            {dinnerParty.description}
-                        </p>
+                        {dinnerParty.description && (
+                            <>
+                                <Divider className="mb-2" />
+                                <p className="wrap-break-word">
+                                    {dinnerParty.description}
+                                </p>
+                            </>
+                        )}
 
                         <Button
                             component={Link}
