@@ -1,12 +1,34 @@
 "use client";
 
 import { Button, Card, Divider } from "@mantine/core";
-import { CalendarBlankIcon } from "@phosphor-icons/react";
+import { CalendarBlankIcon, UsersIcon } from "@phosphor-icons/react";
 import { useClientQueries } from "@zenstackhq/tanstack-query/react";
 import Link from "next/link";
 import { FullscreenLoader } from "@/components/FullscreenLoader";
 import { formatDate } from "@/lib/formatDate";
 import { schema } from "~/zenstack/schema";
+
+function GuestCount({
+    partyId,
+    maxGuests,
+}: {
+    partyId: number;
+    maxGuests: number;
+}) {
+    const client = useClientQueries(schema);
+    const { data: guestCount } = client.$procs.getGuestCount.useQuery({
+        args: { partyId },
+    });
+
+    return (
+        <div className="flex items-center gap-2 text-sm sm:text-base opacity-70 mb-2">
+            <UsersIcon size={16} />
+            <span>
+                {guestCount ?? "…"}/{maxGuests} guests
+            </span>
+        </div>
+    );
+}
 
 export default function Home() {
     const client = useClientQueries(schema);
@@ -34,10 +56,14 @@ export default function Home() {
                         <p className="text-xl sm:text-2xl wrap-break-word">
                             {dinnerParty.title}
                         </p>
-                        <div className="flex items-center gap-2 text-sm sm:text-base opacity-70 mb-2">
+                        <div className="flex items-center gap-2 text-sm sm:text-base opacity-70">
                             <CalendarBlankIcon size={16} />
                             <span>{formatDate(dinnerParty.dateTime)}</span>
                         </div>
+                        <GuestCount
+                            partyId={dinnerParty.id}
+                            maxGuests={dinnerParty.maxGuests}
+                        />
 
                         {dinnerParty.description && (
                             <>
