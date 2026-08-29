@@ -9,5 +9,7 @@
     "editor.tabSize": 4,
     "[zmodel-v3]": {
         "editor.defaultFormatter": "zenstack.zenstack-v3"
-    }
+    },
+    "js/ts.experimental.useTsgo": true,
+    "js/ts.tsdk.path": "./node_modules/typescript"
 }
